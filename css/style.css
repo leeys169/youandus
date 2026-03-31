@@ -647,6 +647,10 @@ label[for="trigger"] span:nth-child(3){
     #sec-0 .header-area .headerMenu{
         width: 90%;
     }
+
+    #footer-area{
+        padding: 50px 50px;
+    }
 }
 
 
