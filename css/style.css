@@ -644,12 +644,17 @@ label[for="trigger"] span:nth-child(3){
 
 /* 반응형 */
 @media screen and (max-width: 1590px){
+
     #sec-0 .header-area .headerMenu{
         width: 90%;
     }
 
+    #footer-area .innerFt{
+        width: auto;
+    }
+
     #footer-area{
-        padding: 50px 50px;
+        padding: 50px;
     }
 }
 
