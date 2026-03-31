@@ -89,7 +89,7 @@ const wrap = document.querySelector("#wrap");
 
     // [핵심] 반응형 상태를 체크하는 함수
     function checkResponse() {
-        if (window.innerWidth <= 1024) { 
+        if (window.innerWidth <= 1590) { 
             // 모바일/태블릿: 풀페이지 기능 해제
             isFullPageActive = false;
             gsap.set(wrap, { clearProps: "all" }); // GSAP이 넣은 y축 값 제거
