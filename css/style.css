@@ -822,7 +822,7 @@ label[for="trigger"] span:nth-child(3){
     }
 
     #sec-1{
-        padding: 80px 0;
+        padding: 110px 0;
     }
 }
 
@@ -862,7 +862,7 @@ label[for="trigger"] span:nth-child(3){
     }
 
     #sec-1{
-        padding: 50px 0;
+        padding: 90px 0;
     }
 
     #sec-1 .txt-box .mainTxt{
@@ -872,10 +872,6 @@ label[for="trigger"] span:nth-child(3){
     label[for="trigger"]{
         width: 15px;
         height: 10px;
-    }
-
-    #sec-1 .txt-box .subTxt{
-        font-size: 12px;
     }
 
     #sec-2 .logo img{
@@ -911,10 +907,6 @@ label[for="trigger"] span:nth-child(3){
 
     #sec-1 .txt-box .mainTxt{
         margin-bottom: 15px;
-    }
-
-    #sec-1 .txt-box .subTxt{
-        font-size: 12px;
     }
 
     #footer-area .innerFt .inner .right-box .box{
