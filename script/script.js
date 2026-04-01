@@ -70,49 +70,32 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ================= GSAP 풀페이지 ================= */
 
 const wrap = document.querySelector("#wrap");
-    const sections = document.querySelectorAll("#wrap > .section");
+    const sections = document.querySelectorAll(".section");
     let currentIndex = 0;
     let isAnimating = false;
     let sectionTops = [];
-    let totalHeight = 0;
-    let isFullPageActive = true; // 풀페이지 활성 상태 확인용
+    let isFullPageActive = true;
 
+    // 1. 위치 및 높이 계산 함수
     function calculatePositions() {
-        if (!isFullPageActive) return;
         sectionTops = [];
-        totalHeight = 0;
-        sections.forEach(sec => {
-            sectionTops.push(totalHeight);
-            totalHeight += sec.offsetHeight;
+        let currentTop = 0;
+        sections.forEach((sec) => {
+            sectionTops.push(currentTop);
+            currentTop += sec.offsetHeight;
         });
     }
 
-    // [핵심] 반응형 상태를 체크하는 함수
-    function checkResponse() {
-        if (window.innerWidth <= 1590) { 
-            // 모바일/태블릿: 풀페이지 기능 해제
-            isFullPageActive = false;
-            gsap.set(wrap, { clearProps: "all" }); // GSAP이 넣은 y축 값 제거
-            document.documentElement.style.overflow = "auto";
-            document.body.style.overflow = "auto";
-        } else {
-            isFullPageActive = true;
-            document.documentElement.style.overflow = "hidden";
-            document.body.style.overflow = "hidden";
-            calculatePositions();
-            moveSection(currentIndex); // 현재 위치로 재정렬
-        }
-
-        if (typeof swiper !== 'undefined') {
-        swiper.update(); // 레이아웃 재계산
-    }
-    }
-
+    // 2. 섹션 이동 함수 (데스크탑 전용: 바닥 고정 로직 포함)
     function moveSection(index) {
         if (!isFullPageActive) return;
         isAnimating = true;
-        const maxMove = totalHeight - window.innerHeight;
-        const targetY = Math.min(sectionTops[index], maxMove);
+
+        // 전체 높이에서 화면 높이를 뺀 '진짜 바닥' 지점
+        const maxMove = wrap.offsetHeight - window.innerHeight;
+        
+        // 목표 지점이 바닥보다 더 내려가면 바닥에 고정 (푸터 잘림 방지)
+        let targetY = Math.min(sectionTops[index], maxMove);
 
         gsap.to(wrap, {
             y: -targetY,
@@ -122,8 +105,41 @@ const wrap = document.querySelector("#wrap");
         });
     }
 
+    // 3. 반응형 체크 함수 (JS로 모든 스타일 제어)
+    function checkResponse() {
+        const width = window.innerWidth;
+
+        if (width <= 1590) {
+            // [모바일/태블릿 모드]
+            isFullPageActive = false;
+            
+            // GSAP 및 인라인 스타일 완전 제거 (푸터 늘어남 방지 핵심)
+            gsap.set(wrap, { clearProps: "all" });
+            wrap.style.transform = "none";
+            wrap.style.height = "auto";
+
+            // 스크롤바 복원
+            document.documentElement.style.overflow = "auto";
+            document.body.style.overflow = "auto";
+        } else {
+            // [데스크탑 풀페이지 모드]
+            isFullPageActive = true;
+            
+            // 스크롤바 제거
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+
+            calculatePositions();
+            moveSection(currentIndex);
+        }
+
+        // 스와이퍼 업데이트
+        if (typeof swiper !== 'undefined') swiper.update();
+    }
+
+    // 4. 휠 이벤트
     window.addEventListener("wheel", (e) => {
-        if (!isFullPageActive) return; // 활성화 상태가 아니면 휠 막지 않음
+        if (!isFullPageActive) return; 
         e.preventDefault();
         if (isAnimating) return;
 
@@ -140,9 +156,16 @@ const wrap = document.querySelector("#wrap");
         }
     }, { passive: false });
 
-    window.addEventListener("resize", checkResponse);
-    checkResponse(); // 초기 실행
+    // 윈도우 리사이즈 이벤트
+    window.addEventListener("resize", () => {
+        // 리사이즈 시 높이 다시 계산
+        if (isFullPageActive) calculatePositions();
+        checkResponse();
+    });
 
+    // 초기 실행
+    checkResponse();
+    
     /* ===============================
         키보드 (선택)
     =============================== */

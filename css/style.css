@@ -455,6 +455,7 @@ label[for="trigger"] span:nth-child(3){
     width: 850px;
     overflow: hidden;
     margin-right: 100px;
+    cursor: pointer;
 }
 
 #sec-3 .slideBox .slides-track .slide:last-child{
@@ -539,12 +540,13 @@ label[for="trigger"] span:nth-child(3){
 
 #footer-area{
     border-top: 1px solid #d9d9d9;
-    padding: 50px 0 56px;
+    padding: 50px;
     color: #121212;
 }
 
 #footer-area .innerFt{
-    width: 1580px;
+    width: 100%;
+    padding: 50pxw;
     margin: 0 auto;
     /* border: 1px solid red; */
 }
@@ -642,7 +644,8 @@ label[for="trigger"] span:nth-child(3){
     display: none;
 }
 
-/* 반응형 */
+/* --------------------반응형------------------- */
+
 @media screen and (max-width: 1590px){
 
     #sec-0 .header-area .headerMenu{
@@ -662,7 +665,7 @@ label[for="trigger"] span:nth-child(3){
 @media screen and (max-width: 1400px) {
     #sec-0 .header-area .headerMenu,
     #footer-area .innerFt {
-        width: 90%; /* 가로폭을 비율로 변경 */
+        /* width: 90%; */
     }
 }
 
@@ -737,11 +740,12 @@ label[for="trigger"] span:nth-child(3){
 
     #footer-area{
         margin-top: 100px;
+        padding: 55px 30px;
     }
 
     #footer-area .innerFt .inner {
         flex-direction: column;
-        gap: 50px;
+        gap: 20px;
     }
     #footer-area .innerFt .inner .right-box .findus {
         flex-direction: column;
@@ -761,7 +765,7 @@ label[for="trigger"] span:nth-child(3){
 
     #sec-0 .banner .main-bg img{
         height: 100% !important;
-        min-height: 70vh;
+        min-height: 100vh;
     }
 
 
@@ -823,12 +827,16 @@ label[for="trigger"] span:nth-child(3){
 }
 
 @media screen and (max-width: 560px){
+    #sec-0 .headerMenu .main-logo img{
+        width: 120px;
+        height: 15px;
+    }
     #sec-0 .inner-img{
         left: 15%;
     }
 
     #sec-0 .inner-img img{
-        width: 50%;
+        width: 70%;
     }
 
     #sec-1 .txt-box .mainTxt{
@@ -839,10 +847,6 @@ label[for="trigger"] span:nth-child(3){
 }
 
 @media screen and (max-width: 460px){
-    #sec-0 .inner-img img{
-        width: 45%;
-    }
-
     #sec-0 .inner-img{
         left: 15%;
     }
@@ -874,8 +878,24 @@ label[for="trigger"] span:nth-child(3){
         font-size: 12px;
     }
 
+    #sec-2 .logo img{
+        width: 90%;
+    }
+
+    #footer-area{
+        padding: 30px;
+    }
+
     #footer-area .innerFt .inner .left-box .info{
         display: none;
+    }
+
+    #footer-area .innerFt .inner{
+        gap: 20px;
+    }
+
+    #footer-area .innerFt .inner .right-box .findus{
+        gap: 10px;
     }
 
     .mo-br{
@@ -895,6 +915,10 @@ label[for="trigger"] span:nth-child(3){
 
     #sec-1 .txt-box .subTxt{
         font-size: 12px;
+    }
+
+    #footer-area .innerFt .inner .right-box .box{
+        font-size: 13px;
     }
 }
 
